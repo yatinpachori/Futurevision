@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hour 22 — Our Tomorrow Together 💫</title>
+<meta name="theme-color" content="#ff6ea8"/>
+<style>
+  :root{
+    --bg1:#ffe6f0; --bg2:#fff7fb; --accent:#ff3f7d; --soft:#ff9ec0; --text:#3b2b3b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, sans-serif;
+    color:var(--text);
+    background: radial-gradient(1200px 800px at 20% -10%, var(--bg2), transparent 70%),
+                radial-gradient(1000px 600px at 120% 10%, #fff, transparent 60%),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+    overflow-x:hidden;
+  }
+  header{
+    padding:48px 20px 10px; text-align:center; position:relative;
+  }
+  .title{
+    font-size: clamp(28px, 6vw, 48px);
+    color:var(--accent);
+    letter-spacing:.5px; margin:0 0 10px;
+    animation: fadeInDown .8s ease both;
+  }
+  .subtitle{
+    margin:0 auto; max-width:800px; line-height:1.6; opacity:.9;
+    animation: fadeIn .9s .25s ease both;
+  }
+
+  /* Floating stars layer (non-interactive, won’t change layout) */
+  #fx{
+    position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:999;
+  }
+  .star{
+    position:absolute; width:6px; height:6px; border-radius:50%;
+    background: radial-gradient(circle, #fff, #ffd1e5);
+    opacity:.8; filter:blur(.2px); animation: floatUp linear forwards;
+  }
+  @keyframes floatUp{
+    from{ transform:translateY(100vh) translateX(0) scale(.9); opacity:.9;}
+    to{ transform:translateY(-10vh) translateX(20px) scale(1); opacity:0;}
+  }
+
+  /* Section cards */
+  .wrap{max-width:1000px; margin:20px auto 80px; padding:0 18px;}
+  .grid{
+    display:grid; gap:18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-top:24px;
+  }
+  .card{
+    background:#fff; border-radius:20px; padding:22px;
+    box-shadow: 0 10px 30px rgba(255,63,125,0.12);
+    transition: transform .25s ease, box-shadow .25s ease;
+    animation: fadeInUp .6s ease both;
+  }
+  .card:hover{ transform: translateY(-4px); box-shadow:0 16px 36px rgba(255,63,125,0.18);}
+  .icon{
+    font-size:26px; width:42px; height:42px; display:grid; place-items:center;
+    background:linear-gradient(135deg,#ffd3e6,#fff); border-radius:14px; margin-bottom:10px;
+  }
+  .card h3{ margin:6px 0 8px; color:#d51f5e; font-size:1.05rem}
+  .card p{ margin:0; opacity:.95; line-height:1.55}
+
+  /* Vision letter */
+  .letter{
+    margin-top:28px; background:#fff; border-radius:22px; padding:24px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.08);
+    animation: fadeIn .8s ease both;
+  }
+  .letter p{ margin:.35rem 0; line-height:1.7}
+  .em{ color:#d51f5e; font-weight:600}
+
+  /* Her dream input */
+  .inputCard{
+    margin-top:26px; background:#ffffff; border-radius:22px; padding:24px;
+    box-shadow: 0 10px 28px rgba(255,63,125,0.12);
+  }
+  .inputCard h3{ margin:4px 0 8px; color:#c41453}
+  .hint{ margin:0 0 12px; opacity:.85}
+  textarea, input[type="text"], input[type="email"]{
+    width:100%; padding:14px 14px; border-radius:14px; border:2px solid #ffc1d8;
+    font-size:16px; outline:none; background:#fff; color:var(--text);
+  }
+  textarea{ resize:vertical; min-height:110px; }
+  .row{ display:grid; gap:12px; grid-template-columns:1fr; margin:10px 0;}
+  .btn{
+    display:inline-block; margin-top:8px; padding:12px 22px; border:none; border-radius:24px;
+    background:linear-gradient(135deg, var(--accent), #ff6ea8); color:#fff; font-size:16px;
+    cursor:pointer; transition: transform .15s ease, box-shadow .2s ease;
+    box-shadow:0 8px 22px rgba(255,63,125,0.25);
+  }
+  .btn:hover{ transform: translateY(-1px); box-shadow:0 12px 28px rgba(255,63,125,0.35);}
+  .btn:active{ transform: translateY(0); }
+
+  .note{
+    font-size:.9rem; opacity:.7; margin-top:10px;
+  }
+
+  footer{
+    text-align:center; padding:28px 16px 60px; opacity:.8; font-size:.95rem;
+  }
+
+  /* Animations */
+  @keyframes fadeIn{ from{opacity:0} to{opacity:1}}
+  @keyframes fadeInDown{ from{opacity:0; transform:translateY(-8px)} to{opacity:1; transform:translateY(0)}}
+  @keyframes fadeInUp{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)}}
+
+  /* Success toast */
+  .toast{
+    position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+    background:#111; color:#fff; padding:12px 16px; border-radius:14px; font-size:.95rem;
+    opacity:0; pointer-events:none; z-index:1000;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); transition:all .35s ease; }
+  /* Confetti bits for submit */
+  .confetti{
+    position:fixed; width:10px; height:10px; top:50%; left:50%;
+    opacity:0; pointer-events:none; z-index:1001;
+  }
+</style>
+</head>
+<body>
+  <!-- Effects layer (prevents layout shift) -->
+  <div id="fx" aria-hidden="true"></div>
+
+  <header>
+    <h1 class="title">Our Tomorrow Together, Bhavya 💖</h1>
+    <p class="subtitle">A little peek into the life I’m building with you — today, tomorrow, and all the days after.</p>
+  </header>
+
+  <main class="wrap">
+    <!-- Highlights grid -->
+    <section class="grid" aria-label="Future highlights">
+      <div class="card" style="animation-delay:.05s">
+        <div class="icon">💍</div>
+        <h3>Promises & Forever</h3>
+        <p>I see us choosing each other, every day — with patience, laughter, and gentle love.</p>
+      </div>
+      <div class="card" style="animation-delay:.1s">
+        <div class="icon">🏡</div>
+        <h3>Home, Together</h3>
+        <p>A cozy place with plants, late-night talks, shared playlists, and sleepy Sunday mornings.</p>
+      </div>
+      <div class="card" style="animation-delay:.15s">
+        <div class="icon">🌍</div>
+        <h3>Adventures</h3>
+        <p>Passport stamps, beach sunsets, city skylines — your hand in mine through it all.</p>
+      </div>
+      <div class="card" style="animation-delay:.2s">
+        <div class="icon">🎓</div>
+        <h3>Dreams & Growth</h3>
+        <p>Cheering for your goals, building mine, and celebrating every tiny win together.</p>
+      </div>
+    </section>
+
+    <!-- Vision letter -->
+    <section class="letter" aria-label="Vision letter">
+      <p>When I picture the future, I don’t see calendar pages — I see <span class="em">you</span>.</p>
+      <p>I see warmth in our kitchen light, road-trip playlists, and your sleepy smile at 7am.</p>
+      <p>I see us learning, unlearning, forgiving, and choosing love again and again.</p>
+      <p>And one day, when distance is just a story we tell, I’ll still be saying this: <span class="em">I’m yours.</span></p>
+    </section>
+
+    <!-- Her dream input -->
+    <section class="inputCard" aria-label="Her dream form">
+      <h3>Your Turn, My Love ✍️</h3>
+      <p class="hint">Write one dream you want in our future — big or small. I’ll keep it close to my heart.</p>
+
+      <!-- Use Formspree: replace YOUR_FORM_ID below -->
+      <form id="dreamForm" action="https://formspree.io/f/mblaqdkz" method="POST">
+        <!-- Optional: capture her name/email for reply -->
+        <textarea name="HerDream" placeholder="e.g., A rainy-day coffee date in our kitchen ☕🌧️" required></textarea>
+
+        <!-- Hidden metadata -->
+        <input type="hidden" name="context" value="Hour 22 — Future Vision" />
+        <input type="hidden" name="to" value="Ashish" />
+
+        <button class="btn" type="submit">Send My Dream 💌</button>
+      </form>
+      <p class="note">Private & secure — it’ll go straight to my inbox.</p>
+    </section>
+  </main>
+
+  <footer>Made with endless love for you, Bhavya. ♾️</footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Thank you, my love. Your dream is on its way. ✨</div>
+
+<script>
+  // Floating soft stars
+  const fx = document.getElementById('fx');
+  function spawnStar(){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = 3 + Math.random()*5;
+    s.style.width = size+'px'; s.style.height=size+'px';
+    s.style.left = Math.random()*window.innerWidth + 'px';
+    s.style.animationDuration = (6 + Math.random()*6)+'s';
+    fx.appendChild(s);
+    setTimeout(()=>s.remove(), 12000);
+  }
+  setInterval(spawnStar, 350);
+
+  // Confetti burst on submit (visual only)
+  function confettiBurst(x, y){
+    for(let i=0;i<60;i++){
+      const c = document.createElement('div');
+      c.className='confetti';
+      c.style.left = x+'px'; c.style.top = y+'px';
+      c.style.background = `hsl(${Math.random()*360}, 80%, 60%)`;
+      c.style.opacity = 1;
+      document.body.appendChild(c);
+      const angle = Math.random()*2*Math.PI;
+      const velocity = 3 + Math.random()*6;
+      const dx = Math.cos(angle)*velocity;
+      const dy = Math.sin(angle)*velocity;
+      let life = 0;
+      const tick = setInterval(()=>{
+        life += 1;
+        c.style.transform = `translate(${dx*life}px, ${dy*life + 0.12*life*life}px) rotate(${life*12}deg)`;
+        c.style.opacity = Math.max(0, 1 - life/90);
+        if(life>90){ clearInterval(tick); c.remove(); }
+      }, 16);
+    }
+  }
+
+  // Toast feedback
+  const toast = document.getElementById('toast');
+  function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2500); }
+
+  // Enhance Formspree submit with visual effects + graceful fallback
+  const form = document.getElementById('dreamForm');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const rect = e.submitter ? e.submitter.getBoundingClientRect() : form.getBoundingClientRect();
+    const cx = rect.left + rect.width/2; const cy = rect.top + rect.height/2;
+    confettiBurst(cx, cy);
+
+    const data = new FormData(form);
+    try{
+      const res = await fetch(form.action, { method:'POST', body:data, headers: { 'Accept': 'application/json' }});
+      if(res.ok){
+        form.reset();
+        showToast('Thank you, my love. Your dream is on its way. ✨');
+      }else{
+        showToast('Hmm, something went wrong. Try again? 🫶');
+      }
+    }catch(err){
+      showToast('Network hiccup. Please try again 💗');
+    }
+  });
+</script>
+</body>
+</html>
